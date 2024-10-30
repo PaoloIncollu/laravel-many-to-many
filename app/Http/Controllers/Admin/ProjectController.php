@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{
     Project,
-    Type
+    Type,
+    Technology
 };
 
 class ProjectController extends Controller
@@ -29,7 +30,8 @@ class ProjectController extends Controller
     {
 
         $types = Type::all();
-        return view('admin.projects.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -45,6 +47,8 @@ class ProjectController extends Controller
         $data['published'] = isset($data['published']);
 
         $project = Project::create($data);
+
+        $project->technologies()->sync($data['technologies'] ?? []);
 
         return redirect()->route('admin.projects.show', ['project' => $project->id]);
     }
@@ -64,7 +68,8 @@ class ProjectController extends Controller
     {
 
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $technologies = Technology::all();
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -81,6 +86,8 @@ class ProjectController extends Controller
         $data['published'] = isset($data['published']);
 
         $project->update($data);
+
+        $project->technologies()->sync($data['technologies'] ?? []);
 
         return redirect()->route('admin.projects.show', ['project' => $project->id]);
     }

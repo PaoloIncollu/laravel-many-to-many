@@ -17,7 +17,7 @@ return new class extends Migration
                     ->after('id')
                     ->constrained()
                     ->onUpdate('cascade')
-                    ->onDelete('set null');
+                    ->onDelete('cascade');
         });
     }
 
@@ -28,12 +28,8 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             if (Schema::hasColumn('projects', 'type_id')) {
-                /* PRIMA rimuovo il vincolo di foreign key (altrimenti non posso droppare la colonna) */
 
-                // OPPURE
                 $table->dropForeign(['type_id']);
-
-                /* E poi droppo la colonna */
                 $table->dropColumn('type_id');
             }
         });
