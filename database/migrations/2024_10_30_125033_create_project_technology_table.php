@@ -25,8 +25,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->primary([
-                'post_id',
-                'tag_id'
+                'project_id',
+                'technology_id'
 
             ]);
         });
