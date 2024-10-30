@@ -48,7 +48,7 @@
                         <li>
                             Post collegati:
 
-                             @if ($type->project()->count() > 0)
+                             @if ($type->projects()->count() > 0)
                                 <ul>
                                     @foreach ($type->project as $project)
                                         <li>

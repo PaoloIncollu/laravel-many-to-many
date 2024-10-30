@@ -20,7 +20,7 @@ class Project extends Model
 
     ];
 
-    public function type()
+    public function types()
     {
         return $this->belongsTo(Type::class);
     }

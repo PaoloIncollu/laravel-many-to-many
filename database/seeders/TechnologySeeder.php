@@ -20,7 +20,7 @@ class TechnologySeeder extends Seeder
             Technology::truncate();
         });
 
-        $allTypes = [
+        $allTechnologies = [
             'HTML',
             'CSS',
             'Java Script',
@@ -30,10 +30,10 @@ class TechnologySeeder extends Seeder
             'Laravel'
         ];
 
-        foreach ($allTypes as $singletype) {
-            $type = Technology::create([
-                'name' => $singletype,
-                'slug' => str()->slug($singletype),
+        foreach ($allTechnologies as $singletechnology) {
+            $technology = Technology::create([
+                'name' => $singletechnology,
+                'slug' => str()->slug($singletechnology),
             ]);
         }
     }
