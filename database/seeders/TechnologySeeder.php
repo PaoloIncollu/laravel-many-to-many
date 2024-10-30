@@ -2,17 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Technology;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
 //Helpers
 use Illuminate\Support\Facades\Schema;
 
-// Models
 
-use App\Models\Type;
-
-class TypeSeeder extends Seeder
+class TechnologySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -20,21 +17,21 @@ class TypeSeeder extends Seeder
     public function run(): void
     {
         Schema::withoutForeignKeyConstraints(function () {
-            Type::truncate();
+            Technology::truncate();
         });
 
         $allTypes = [
-            'E-commerce',
-            'Corporate',
-            'Portfolio',
-            'Blog',
-            'No-Profit',
-            'Educational',
-            'Personal'
+            'HTML',
+            'CSS',
+            'Java Script',
+            'Vue',
+            'SQL',
+            'PHP',
+            'Laravel'
         ];
 
         foreach ($allTypes as $singletype) {
-            $type = Type::create([
+            $type = Technology::create([
                 'name' => $singletype,
                 'slug' => str()->slug($singletype),
             ]);
