@@ -39,17 +39,39 @@
 
                 Tipo:
                 @if (isset($project->type))
-                <a href="{{ route('admin.types.show', ['type' => $project->type_id]) }}">
 
-                    {{ $project->type->name }}
-                </a>
+                    <a href="{{ route('admin.types.show', ['type' => $project->type_id]) }}">
 
+                        {{ $project->type->name }}
+
+                    </a>
                 @else
-                -
+                    -
                 @endif
 
-
             </li>
+
+            <li class="list-group-item">
+                Tecnologie collegate:
+
+                @if ($project->technologies()->count() > 0)
+                    <ul>
+                        @foreach ($project->technologies as $technology)
+                            <li class="list-group-item">
+                                <a href="{{ route('admin.technologies.show', ['technology' => $technology->id]) }}" class="badge rounded-pill text-bg-primary">
+                                    {{ $technology->name }}
+                                </a>
+                                <small>
+                                    (associazione creata il {{ $technology->pivot->created_at->format('d/m/Y') }})
+                                </small>
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    -
+                @endif
+            </li>
+
             <li class="list-group-item">
                 Data di creazione: {{ $project->creation_date }}
             </li>

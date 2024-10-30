@@ -13,7 +13,7 @@ class ProjectSeeder extends Seeder
      */
     public function run(): void
     {
-        Project::truncate();
+        
 
         for ($i = 0; $i < 20; $i ++){
 

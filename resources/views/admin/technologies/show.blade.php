@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page-title', $type->name)
+@section('page-title', $technology->name)
 
 @section('main-content')
     <div class="row mb-4">
@@ -8,12 +8,12 @@
             <div class="card">
                 <div class="card-body">
                     <h1 class="text-center text-success">
-                        {{ $type->name }}
+                        {{ $technology->name }}
                     </h1>
                     <h6 class="text-center">
-                        Creata il: {{ $type->created_at->format('d/m/Y') }}
+                        Creato il: {{ $technology->created_at->format('d/m/Y') }}
                         <br>
-                        alle: {{ $type->created_at->format('H:i') }}
+                        alle: {{ $technology->created_at->format('H:i') }}
                     </h6>
                 </div>
             </div>
@@ -21,11 +21,11 @@
     </div>
     <div class="row mb-4">
         <div class="col text-end">
-            <a href="{{ route('admin.types.edit', ['type' => $type->id]) }}" class="btn btn-warning">
+            <a href="{{ route('admin.technologies.edit', ['technology' => $technology->id]) }}" class="btn btn-warning">
                 Modifica
             </a>
-            <form action="{{ route('admin.types.destroy', ['type' => $type->id]) }}" method="post" class="d-inline-block"
-                onsubmit="return confirm('Sei sicur* di voler eliminare questa categoria?')">
+            <form action="{{ route('admin.technologies.destroy', ['technology' => $technology->id]) }}" method="post" class="d-inline-block"
+                onsubmit="return confirm('Sei sicur* di voler eliminare questo technology?')">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">
@@ -40,21 +40,24 @@
                 <div class="card-body">
                     <ul>
                         <li>
-                            ID: {{ $type->id }}
+                            ID: {{ $technology->id }}
                         </li>
                         <li>
-                            Slug: {{ $type->slug }}
+                            Slug: {{ $technology->slug }}
                         </li>
                         <li>
-                            Post collegati:
+                            Progetti collegati:
 
-                             @if ($type->projects()->count() > 0)
+                            @if ($technology->projects()->count() > 0)
                                 <ul>
-                                    @foreach ($type->projects as $project)
+                                    @foreach ($technology->projects as $project)
                                         <li>
                                             <a href="{{ route('admin.projects.show', ['project' => $project->id]) }}">
                                                 {{ $project->name }}
                                             </a>
+                                            <small>
+                                                (associazione creata il {{ $project->pivot->created_at->format('d/m/Y') }})
+                                            </small>
                                         </li>
                                     @endforeach
                                 </ul>

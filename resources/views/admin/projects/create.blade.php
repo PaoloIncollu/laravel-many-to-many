@@ -67,6 +67,7 @@
 
 
 
+
     <div class="mb-3">
         <label for="description" class="form-label">Descrizione <span class="text-danger">*</span></label>
         <textarea class="form-control  @error('description') is-invalid @enderror" id="description" name="description" rows="3" required maxlength="4096" placeholder="Inserisci una descrizione..." >{{ old('description') }}</textarea>
@@ -83,6 +84,46 @@
             </ul>
         </div>
     @endif
+    </div>
+
+    <div class="mb-3">
+        <label for="type_id" class="form-label">Tipo</label>
+        <select id="type_id" name="type_id" class="form-select">
+            <option
+                @if (old('type_id') == null)
+                    selected
+                @endif
+                value="">Seleziona una categoria...</option>
+            @foreach ($types as $type)
+                <option
+                    @if (old('type_id') == $type->id)
+                        selected
+                    @endif
+                    value="{{ $type->id }}">{{ $type->name }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <div>
+            <label class="form-label">Tecnologie</label>
+        </div>
+        @foreach ($technologies as $technology)
+            <div class="form-check form-check-inline">
+                <input
+                    @if (in_array($technology->id, old('technologies', [])))
+                        checked
+                    @endif
+                    class="form-check-input"
+                    type="checkbox"
+                    id="ttechnology-{{ $technology->id }}"
+                    name="technologies[]"
+                    value="{{ $technology->id }}">
+                <label class="form-check-label" for="technology-{{ $technology->id }}">
+                    {{ $technology->name }}
+                </label>
+            </div>
+        @endforeach
     </div>
 
     <div class="mb-3">

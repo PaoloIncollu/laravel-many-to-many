@@ -21,6 +21,8 @@
             <th scope="col">#</th>
             <th scope="col" class="text-center">Nome</th>
             <th scope="col" class="text-center">Data di creazione</th>
+            <th scope="col" class="text-center">Tipo</th>
+            <th scope="col" class="text-center">Tecnologie</th>
             <th scope="col" class="text-center">Pubblicato</th>
             <th scope="col" class="text-center">Azioni</th>
 
@@ -32,6 +34,25 @@
                 <th class="text-center" scope="row">{{ $project->id }}</th>
                 <td class="text-center">{{ $project->name }}</td>
                 <td class="text-center">{{ $project->creation_date }}</td>
+                <td class="text-center">
+                    @if (isset($project->type))
+                        <a href="{{ route('admin.types.show', ['type' => $project->type_id]) }}">
+                            {{ $project->type->name }}
+                        </a>
+                    @else
+                        -
+                    @endif
+                </td>
+                <td class="text-center">
+                    @forelse($project->technologies as $technology)
+                        <a href="{{ route('admin.technologies.show', ['technology' => $technology->id]) }}" class="badge rounded-pill text-bg-primary">
+                            {{ $technology->name }}
+                        </a>
+                    @empty
+                        -
+                    @endforelse
+                </td>
+                
                 <td class="text-center">{{ $project->published ? 'SI' : 'NO' }} </td>
                 <td class="d-flex justify-content-around text-center">
 
