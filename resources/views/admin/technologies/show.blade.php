@@ -19,8 +19,8 @@
             </div>
         </div>
     </div>
-    <div class="row mb-4">
-        <div class="col text-end">
+    <div class="d-flex justify-content-between mb-4">
+        <div>
             <a href="{{ route('admin.technologies.edit', ['technology' => $technology->id]) }}" class="btn btn-warning">
                 Modifica
             </a>
@@ -32,6 +32,17 @@
                     Elimina
                 </button>
             </form>
+        </div>
+
+        <div>
+
+            <a href="{{ route('admin.technologies.index', ['technology' => $technology->id]) }}" class="btn btn-primary me-2">
+
+                Indietro
+
+            </a>
+
+
         </div>
     </div>
     <div class="row">

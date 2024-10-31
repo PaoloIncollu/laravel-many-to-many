@@ -7,6 +7,16 @@
     Crea Progetto
 </h1>
 
+<div class="d-flex justify-content-end">
+
+    <a href="{{ route('admin.projects.index')}}" class="btn btn-primary me-2">
+
+        Indietro
+
+    </a>
+
+</div>
+
 <form action="{{ route('admin.projects.store') }}" method="POST">
     @csrf
 

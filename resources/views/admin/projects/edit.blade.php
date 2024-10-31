@@ -7,6 +7,16 @@
     Modifica {{ $project->name }}
 </h1>
 
+<div class="d-flex justify-content-end">
+
+    <a href="{{ route('admin.projects.index', ['project' => $project->id]) }}" class="btn btn-primary me-2">
+
+        Indietro
+
+    </a>
+
+</div>
+
 <form onsubmit="return confirm('Sei sicuro di voler modificare il progetto?')" action="{{ route('admin.projects.update', ['project' => $project->id]) }}" method="POST">
     @csrf
     @method ('PUT')

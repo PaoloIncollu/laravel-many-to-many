@@ -18,7 +18,9 @@
     <div class="row mb-4">
         <div class="col text-end">
             <a href="{{ route('admin.types.show', ['type' => $type->id]) }}" class="btn btn-primary">
-                Vedi
+
+                Indietro
+                
             </a>
         </div>
     </div>

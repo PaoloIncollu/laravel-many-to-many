@@ -15,6 +15,16 @@
         </div>
     </div>
 
+    <div class="d-flex justify-content-end mb-4">
+
+        <a href="{{ route('admin.technologies.index')}}" class="btn btn-primary me-2">
+
+            Indietro
+
+        </a>
+
+    </div>
+
     @if ($errors->any())
 
         <div class="alert alert-danger mb-4">

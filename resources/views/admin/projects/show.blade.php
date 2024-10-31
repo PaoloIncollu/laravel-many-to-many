@@ -6,23 +6,40 @@
 <h1>
     {{ $project->name }}
 </h1>
-<div class="d-flex">
+<div class="d-flex justify-content-between mb-4">
 
-    <a href="{{ route('admin.projects.edit', ['project' => $project->id]) }}" class="btn btn-warning me-2">
+    <div class="d-flex">
 
-        Modifica
 
-    </a>
-    <form onsubmit=" return confirm('Sei sicuro di voler cancellare questo progetto?')" action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}" method="POST">
+        <a href="{{ route('admin.projects.edit', ['project' => $project->id]) }}" class="btn btn-warning me-2">
 
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger">
+            Modifica
 
-            Elimina
+        </a>
+        <form onsubmit=" return confirm('Sei sicuro di voler cancellare questo progetto?')" action="{{ route('admin.projects.destroy', ['project' => $project->id]) }}" method="POST">
 
-        </button>
-    </form>
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">
+
+                Elimina
+
+            </button>
+        </form>
+
+    </div>
+
+    <div>
+
+        <a href="{{ route('admin.projects.index', ['project' => $project->id]) }}" class="btn btn-primary me-2">
+
+            Indietro
+
+        </a>
+
+    </div>
+
+
 </div>
 
 <div class="card">
