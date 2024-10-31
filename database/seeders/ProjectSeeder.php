@@ -6,6 +6,9 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Project;
 use App\Models\Type;
+
+// Helpers
+use Illuminate\Support\Facades\Schema;
 class ProjectSeeder extends Seeder
 {
     /**
@@ -13,7 +16,10 @@ class ProjectSeeder extends Seeder
      */
     public function run(): void
     {
-        
+
+        Schema::withoutForeignKeyConstraints(function() {
+            Project::truncate();
+        });
 
         for ($i = 0; $i < 20; $i ++){
 
