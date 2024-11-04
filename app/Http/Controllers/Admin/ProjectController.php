@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+// Helpers
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -46,6 +48,11 @@ class ProjectController extends Controller
         $data['slug'] = str()->slug($data['name']);
         $data['published'] = isset($data['published']);
 
+        if (isset($data['cover'])) {
+            $coverPath = Storage::disk('public')->put('uploads', $data['cover']);
+            $data['cover'] = $coverPath;
+        }
+
         $project = Project::create($data);
 
         $project->technologies()->sync($data['technologies'] ?? []);
@@ -85,6 +92,22 @@ class ProjectController extends Controller
         $data['slug'] = str()->slug($data['name']);
         $data['published'] = isset($data['published']);
 
+        if (isset($data['cover'])) {
+            if ($project->cover) {
+                // ELIMINA L'IMMAGINE PRECEDENTE
+                Storage::disk('public')->delete($project->cover);
+                $project->cover = null;
+            }
+
+            $coverPath = Storage::disk('public')->put('uploads', $data['cover']);
+            $data['cover'] = $coverPath;
+        }
+        else if (isset($data['remove_cover']) && $project->cover) {
+            // ELIMINA L'IMMAGINE PRECEDENTE
+            Storage::disk('public')->delete($project->cover);
+            $project->cover = null;
+        }
+
         $project->update($data);
 
         $project->technologies()->sync($data['technologies'] ?? []);
@@ -97,6 +120,12 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+
+        if ($project->cover) {
+            // ELIMINA L'IMMAGINE PRECEDENTE
+            Storage::disk('public')->delete($project->cover);
+        }
+
         $project->delete();
         return redirect()->route('admin.projects.index');
     }
@@ -110,6 +139,7 @@ class ProjectController extends Controller
             'content' => 'required|min:10|max:5000',
             'creation_date' => 'nullable|date',
             'published' => 'nullable|in:1,0,true,false',
+            'cover' => 'nullable|image|max:2048',
             'type_id' => 'nullable|exists:types,id',
 
         ]);

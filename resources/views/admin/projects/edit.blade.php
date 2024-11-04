@@ -17,7 +17,7 @@
 
 </div>
 
-<form onsubmit="return confirm('Sei sicuro di voler modificare il progetto?')" action="{{ route('admin.projects.update', ['project' => $project->id]) }}" method="POST">
+<form onsubmit="return confirm('Sei sicuro di voler modificare il progetto?')" action="{{ route('admin.projects.update', ['project' => $project->id]) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method ('PUT')
     <div class="mb-3">
@@ -93,6 +93,27 @@
             </ul>
         </div>
     @endif
+    </div>
+
+    <div class="mb-3">
+        <label for="cover" class="form-label">Immagine di copertina</label>
+        <input type="file" class="form-control @error('cover') is-invalid @enderror" id="cover" name="cover" maxlength="2048" >
+
+        @if ($project->cover)
+            <div class="mt-2">
+                <h5>
+                    Copertina attuale:
+                </h5>
+                <img src="{{ asset('storage/'.$project->cover) }}" alt="{{ $project->name }}" style="height: 150px;">
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="1" id="remove_cover" name="remove_cover">
+                    <label class="form-check-label" for="remove_cover">
+                        Rimuovi copertina attuale
+                    </label>
+                </div>
+            </div>
+        @endif
     </div>
 
 

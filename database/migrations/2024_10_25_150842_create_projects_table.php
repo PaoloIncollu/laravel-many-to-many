@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description', 5000);
             $table->text('content', 5000);
             $table->date('creation_date')->nullable();
+            $table->string('cover')->nullable();
             $table->boolean('published');
             $table->timestamps();
         });

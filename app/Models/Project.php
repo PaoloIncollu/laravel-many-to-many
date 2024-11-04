@@ -16,6 +16,7 @@ class Project extends Model
         'content',
         'creation_date',
         'published',
+        'cover',
         'type_id'
 
     ];

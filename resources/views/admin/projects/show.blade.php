@@ -114,8 +114,26 @@
 
             {{ $project->description }}
             </p>
+
+
+            <li class="list-group-item">
+
+                <h3>
+                    Immagine di copertina
+                </h3>
+
+                @if ($project->cover)
+
+                    <img src="{{ asset('storage/'.$project->cover) }}" alt="{{ $project->name }}" class="card-img-bottom img-cover">
+
+                @endif
+
+            </li>
         </ul>
+
+
     </div>
+
 
 </div>
 @endsection
