@@ -124,7 +124,7 @@
 
                 @if ($project->cover)
 
-                    <img src="{{ asset('storage/'.$project->cover) }}" alt="{{ $project->name }}" class="card-img-bottom img-cover">
+                    <img src="{{ asset('storage/'.$project->cover) }}" alt="{{ $project->name }}" class="card-img img-cover">
 
                 @endif
 
